@@ -8,8 +8,6 @@ public class Aar2Libs {
 	private static List<String> aars = new ArrayList<>();
 
 	public static void main(String[] args) {
-		args = new String[] { "E:/aaa/" };
-
 		if (args == null || args.length <= 0) {
 			System.out.println("please input aar directory path !");
 			return;
@@ -52,11 +50,19 @@ public class Aar2Libs {
 			FileUtils.deleteDirectory(temp);
 		}
 
-		// 1、处理assets文件夹
+		// 1、合并assets文件夹
 		FileUtils.mergeAssets(aars, result + "assets");
 
-		// 2、处理libs,jni文件夹
+		// 2、合并libs,jni文件夹
 		FileUtils.mergeJni(aars, result + "libs");
+
+		// 3、合并res文件夹
+		FileUtils.mergeRes(aars, result + "res");
+		
+		// 4、合并Manifest文件夹
+		FileUtils.mergeManifest(aars, result);
+
+		System.out.println("execute finished");
 	}
 
 }
